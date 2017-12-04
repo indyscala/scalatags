@@ -18,7 +18,13 @@ object EscapedInputs extends App with DemoSupport {
         title:=evilInput1,
         "This is my title"
       ),
-      evilInput2
+      evilInput2,
+
+      div(marginTop:="50px")(
+        a(href:="http://www.lihaoyi.com/scalatags/#Auto-escapingandunsanitizedInput")(
+          p("Docs")
+        )
+      )
     )
   )
 
