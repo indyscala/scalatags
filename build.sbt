@@ -21,6 +21,12 @@ lazy val site = (project in file("site"))
   .enablePlugins(HepekPlugin)
   .settings(
     commonSettings,
+
+    run := {
+      val url = target.value / "web/public/main/index.html"
+      streams.value.log.info(s"Opening $url in browser...")
+      java.awt.Desktop.getDesktop.browse(url.toURI)
+    }
   )
 
 lazy val `scalatags-demo` = (project in file("."))
