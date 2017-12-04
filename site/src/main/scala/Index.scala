@@ -44,9 +44,9 @@ object Index extends Renderable {
           h1(id := "title", titleText),
           p("Slightly less lame demo."),
         ),
-        script(`type` := "javascript" ,src := JQuery.href),
-        script(`type` := "javascript" ,src := Popper.href),
-        script(`type` := "javascript" ,src := BootstrapJs.href),
+        script(`type` := "javascript", src := JQuery.href),
+        script(`type` := "javascript", src := Popper.href),
+        script(`type` := "javascript", src := BootstrapJs.href),
       )
     )
   }.toString()
