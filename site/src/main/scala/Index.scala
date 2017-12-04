@@ -4,9 +4,11 @@ import java.io.File
 import ba.sake.hepek.core.Renderable
 
 object Index extends Renderable {
+  import scalatags.Text.all._
+
+  private val crossorigin = attr("crossorigin")
 
   override def render: String = {
-    import scalatags.Text.all._
     import scalatags.Text.tags2.title
 
     val titleText = "Static Site with ScalaTags"
@@ -14,7 +16,7 @@ object Index extends Renderable {
     html(
       head(
         title(titleText),
-        link(rel := "stylesheet", href := "assets/bootstrap/bootstrap.min.css"),
+        link(rel := "stylesheet", href := "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", crossorigin := "anonymous"),
       ),
       body(
         div(cls := "container",
