@@ -17,5 +17,11 @@ lazy val basics = (project in file("basics"))
     commonSettings,
   )
 
+lazy val site = (project in file("site"))
+  .enablePlugins(HepekPlugin)
+  .settings(
+    commonSettings,
+  )
+
 lazy val `scalatags-demo` = (project in file("."))
-  .aggregate(basics)
+  .aggregate(basics, site)
