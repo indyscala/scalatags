@@ -14,7 +14,13 @@ object Templates extends App with DemoSupport {
       p("This is the first ", b("image"), " displayed on the ", a("site")),
       // courtesy http://www.publicdomainpictures.net/view-image.php?image=167326&picture=cat-on-the-white
       img(src:="http://www.publicdomainpictures.net/pictures/170000/velka/cat-on-the-white-1462965930mn5.jpg"),
-      p("blah blah blah i am text")
+      p("blah blah blah i am text"),
+
+      div(marginTop:="50px")(
+        a(href:="http://www.lihaoyi.com/scalatags/#Layouts")(
+          p("Docs")
+        )
+      )
     )
   )
 
