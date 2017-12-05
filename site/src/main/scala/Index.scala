@@ -23,11 +23,9 @@ object Index extends Renderable {
     s"https://maxcdn.bootstrapcdn.com/bootstrap/$BootstrapVersion/js/bootstrap.min.js",
     "sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ")
 
-  private val crossorigin = attr("crossorigin")
-  private val integrity = attr("integrity")
 
   /**
-   * Contents of `index.html`.
+   * Contents of `index.html` written via sbt-hepek `Renderable`.
    */
   override def render: String = {
     import scalatags.Text.tags2.title
@@ -37,20 +35,26 @@ object Index extends Renderable {
     html(
       head(
         title(titleText),
-        link(rel := "stylesheet", href := BootstrapCss.href, integrity := BootstrapCss.checksum, crossorigin := "anonymous"),
+        cssRef(BootstrapCss),
       ),
       body(
         div(cls := "container",
           h1(id := "title", titleText),
           p("Slightly less lame demo."),
         ),
-        script(`type` := "javascript", src := JQuery.href),
-        script(`type` := "javascript", src := Popper.href),
-        script(`type` := "javascript", src := BootstrapJs.href),
+        scriptRef(JQuery),
+        scriptRef(Popper),
+        scriptRef(BootstrapJs),
       )
     )
   }.toString()
 
   override def relPath: File = new File("index.html")
-}
 
+  private val crossorigin = attr("crossorigin")
+  private val integrity = attr("integrity")
+
+  def cssRef(asset: CdnAsset): ConcreteHtmlTag[String] = link(rel := "stylesheet", href := asset.href, integrity := asset.checksum, crossorigin := "anonymous")
+  def scriptRef(asset: CdnAsset): ConcreteHtmlTag[String] = scalatags.Text.tags.script(`type` := "javascript", src := asset.href, integrity := asset.checksum, crossorigin := "anonymous")
+
+}
