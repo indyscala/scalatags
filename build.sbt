@@ -15,6 +15,7 @@ lazy val commonSettings = Seq(
 lazy val basics = (project in file("basics"))
   .settings(
     commonSettings,
+    mainClass in (Compile, run) := Some("org.indyscala.scalatags.basics.RunAll")
   )
 
 lazy val site = (project in file("site"))
@@ -23,6 +24,8 @@ lazy val site = (project in file("site"))
     commonSettings,
 
     run := {
+      (hepek in Compile).value
+
       val url = target.value / "web/public/main/index.html"
       streams.value.log.info(s"Opening $url in browser...")
       java.awt.Desktop.getDesktop.browse(url.toURI)
@@ -31,3 +34,9 @@ lazy val site = (project in file("site"))
 
 lazy val `scalatags-demo` = (project in file("."))
   .aggregate(basics, site)
+  .settings(
+    run := {
+      (run in basics in Compile).evaluated
+      (run in site in Compile).evaluated
+    }
+  )
